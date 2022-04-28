@@ -10,6 +10,8 @@ define("super-rentals/tests/acceptance/super-rentals-test", ["qunit", "@ember/te
     (0, _qunit.test)("visiting /", async function (assert) {
       await (0, _testHelpers.visit)("/");
       assert.strictEqual((0, _testHelpers.currentURL)(), "/");
+      assert.dom("nav").exists();
+      assert.dom("h1").hasText("SuperRentals");
       assert.dom("h2").hasText("Welcome to Super Rentals!");
       assert.dom(".jumbo a.button").hasText("About Us");
       await (0, _testHelpers.click)(".jumbo a.button");
@@ -18,6 +20,8 @@ define("super-rentals/tests/acceptance/super-rentals-test", ["qunit", "@ember/te
     (0, _qunit.test)("visiting /about", async function (assert) {
       await (0, _testHelpers.visit)("/about");
       assert.strictEqual((0, _testHelpers.currentURL)(), "/about");
+      assert.dom("nav").exists();
+      assert.dom("h1").hasText("SuperRentals");
       assert.dom("h2").hasText("About Super Rentals");
       assert.dom(".jumbo a.button").hasText("Contact Us");
       await (0, _testHelpers.click)(".jumbo a.button");
@@ -26,10 +30,25 @@ define("super-rentals/tests/acceptance/super-rentals-test", ["qunit", "@ember/te
     (0, _qunit.test)("visiting /getting-in-touch", async function (assert) {
       await (0, _testHelpers.visit)("/getting-in-touch");
       assert.strictEqual((0, _testHelpers.currentURL)(), "/getting-in-touch");
+      assert.dom("nav").exists();
+      assert.dom("h1").hasText("SuperRentals");
       assert.dom("h2").hasText("Contact Us");
       assert.dom(".jumbo a.button").hasText("About");
       await (0, _testHelpers.click)(".jumbo a.button");
       assert.strictEqual((0, _testHelpers.currentURL)(), "/about");
+    });
+    (0, _qunit.test)("navigating using the nav-bar", async function (assert) {
+      await (0, _testHelpers.visit)("/");
+      assert.dom("nav").exists();
+      assert.dom("nav a.menu-index").hasText("SuperRentals");
+      assert.dom("nav a.menu-about").hasText("About");
+      assert.dom("nav a.menu-contact").hasText("Contact");
+      await (0, _testHelpers.click)("nav a.menu-about");
+      assert.strictEqual((0, _testHelpers.currentURL)(), "/about");
+      await (0, _testHelpers.click)("nav a.menu-contact");
+      assert.strictEqual((0, _testHelpers.currentURL)(), "/getting-in-touch");
+      await (0, _testHelpers.click)("nav a.menu-index");
+      assert.strictEqual((0, _testHelpers.currentURL)(), "/");
     });
   });
 });
@@ -71,6 +90,64 @@ define("super-rentals/tests/helpers/index", ["exports", "ember-qunit"], function
   function setupTest(hooks, options) {
     (0, _emberQunit.setupTest)(hooks, options); // Additional setup for unit tests can be done here.
   }
+});
+define("super-rentals/tests/integration/components/jumbo-test", ["@ember/template-factory", "qunit", "ember-qunit", "@ember/test-helpers"], function (_templateFactory, _qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)("Integration | Component | jumbo", function (hooks) {
+    (0, _emberQunit.setupRenderingTest)(hooks);
+    (0, _qunit.test)("it renders the content inside a jumbo header with a tomster", async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Jumbo>Hello World</Jumbo>
+      */
+      {
+        "id": "I+q5iC61",
+        "block": "[[[8,[39,0],null,null,[[\"default\"],[[[[1,\"Hello World\"]],[]]]]]],[],false,[\"jumbo\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom(".jumbo").exists();
+      assert.dom(".jumbo").hasText("Hello World");
+      assert.dom(".jumbo .tomster").exists();
+    });
+  });
+});
+define("super-rentals/tests/integration/components/nav-bar-test", ["qunit", "ember-qunit", "@ember/test-helpers"], function (_qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)("Integration | Component | nav-bar", function (hooks) {});
+});
+define("super-rentals/tests/integration/components/rental-test", ["@ember/template-factory", "qunit", "ember-qunit", "@ember/test-helpers"], function (_templateFactory, _qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)("Integration | Component | rental", function (hooks) {
+    (0, _emberQunit.setupRenderingTest)(hooks);
+    (0, _qunit.test)("it renders information about a rental property", async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Rental />
+      */
+      {
+        "id": "1+NRzuWU",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"rental\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom("article").hasClass("rental");
+      assert.dom("article h3").hasText("Grand Old Mansion");
+      assert.dom("article .detail.owner").includesText("Veruca Salt");
+      assert.dom("article .detail.type").includesText("Standalone");
+      assert.dom("article .detail.location").includesText("San Francisco");
+      assert.dom("article .detail.bedrooms").includesText("15");
+    });
+  });
 });
 define("super-rentals/tests/test-helper", ["super-rentals/app", "super-rentals/config/environment", "qunit", "@ember/test-helpers", "qunit-dom", "ember-qunit"], function (_app, _environment, QUnit, _testHelpers, _qunitDom, _emberQunit) {
   "use strict";
