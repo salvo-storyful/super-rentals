@@ -134,6 +134,10 @@
   const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
   /*
     <article class="rental">
+    <Rental::Image
+      src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
+      alt="A picture of Grand Old Mansion"
+    />
     <div class="details">
       <h3>Grand Old Mansion</h3>
       <div class="detail owner">
@@ -157,8 +161,8 @@
   
   */
   {
-    "id": "7FeSCMeR",
-    "block": "[[[10,\"article\"],[14,0,\"rental\"],[12],[1,\"\\n  \"],[10,0],[14,0,\"details\"],[12],[1,\"\\n    \"],[10,\"h3\"],[12],[1,\"Grand Old Mansion\"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail owner\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Owner:\"],[13],[1,\"\\n      Veruca Salt\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail type\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Type:\"],[13],[1,\"\\n      Standalone\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail location\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Location:\"],[13],[1,\"\\n      San Francisco\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail bedrooms\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Number of bedrooms:\"],[13],[1,\"\\n      15\\n    \"],[13],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[],false,[]]",
+    "id": "/nJmWQMU",
+    "block": "[[[10,\"article\"],[14,0,\"rental\"],[12],[1,\"\\n  \"],[8,[39,0],[[24,\"src\",\"https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg\"],[24,\"alt\",\"A picture of Grand Old Mansion\"]],null,null],[1,\"\\n  \"],[10,0],[14,0,\"details\"],[12],[1,\"\\n    \"],[10,\"h3\"],[12],[1,\"Grand Old Mansion\"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail owner\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Owner:\"],[13],[1,\"\\n      Veruca Salt\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail type\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Type:\"],[13],[1,\"\\n      Standalone\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail location\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Location:\"],[13],[1,\"\\n      San Francisco\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail bedrooms\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Number of bedrooms:\"],[13],[1,\"\\n      15\\n    \"],[13],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[],false,[\"rental/image\"]]",
     "moduleName": "super-rentals/components/rental.hbs",
     "isStrictMode": false
   });
@@ -166,6 +170,70 @@
   var _default = (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, (0, _templateOnly.default)());
 
   _exports.default = _default;
+});
+;define("super-rentals/components/rental/image", ["exports", "@ember/component", "@ember/template-factory", "@glimmer/component", "@glimmer/tracking", "@ember/object"], function (_exports, _component, _templateFactory, _component2, _tracking, _object) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _class, _descriptor;
+
+  0; //eaimeta@70e063a35619d71f0,"ember-cli-htmlbars",0,"@glimmer/component",0,"@glimmer/tracking",0,"@ember/object"eaimeta@70e063a35619d71f
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
+  /*
+    <button
+    type="button"
+    class="image {{if this.isLarge 'large'}}"
+    {{on "click" this.toggleSize}}
+  >
+    <img ...attributes />
+    <small>
+      View
+      {{if this.isLarge "Smaller" "Larger"}}
+    </small>
+  </button>
+  
+  */
+  {
+    "id": "/XxNlqib",
+    "block": "[[[11,\"button\"],[16,0,[29,[\"image \",[52,[30,0,[\"isLarge\"]],\"large\"]]]],[24,4,\"button\"],[4,[38,1],[\"click\",[30,0,[\"toggleSize\"]]],null],[12],[1,\"\\n  \"],[11,\"img\"],[17,1],[12],[13],[1,\"\\n  \"],[10,\"small\"],[12],[1,\"\\n    View\\n    \"],[1,[52,[30,0,[\"isLarge\"]],\"Smaller\",\"Larger\"]],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"&attrs\"],false,[\"if\",\"on\"]]",
+    "moduleName": "super-rentals/components/rental/image.hbs",
+    "isStrictMode": false
+  });
+
+  let RentalImageComponent = (_class = class RentalImageComponent extends _component2.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "isLarge", _descriptor, this);
+    }
+
+    toggleSize() {
+      this.isLarge = !this.isLarge;
+    }
+
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, "isLarge", [_tracking.tracked], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return false;
+    }
+  }), _applyDecoratedDescriptor(_class.prototype, "toggleSize", [_object.action], Object.getOwnPropertyDescriptor(_class.prototype, "toggleSize"), _class.prototype)), _class);
+  _exports.default = RentalImageComponent;
+  (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, RentalImageComponent);
 });
 ;define("super-rentals/components/welcome-page", ["exports", "ember-welcome-page/components/welcome-page.js"], function (_exports, _welcomePage) {
   "use strict";
@@ -723,7 +791,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+82552cf5"});
+            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+f99dafc6"});
           }
         
 //# sourceMappingURL=super-rentals.map

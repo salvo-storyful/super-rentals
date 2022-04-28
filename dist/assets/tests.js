@@ -146,6 +146,60 @@ define("super-rentals/tests/integration/components/rental-test", ["@ember/templa
       assert.dom("article .detail.type").includesText("Standalone");
       assert.dom("article .detail.location").includesText("San Francisco");
       assert.dom("article .detail.bedrooms").includesText("15");
+      assert.dom("article .image").exists();
+    });
+  });
+});
+define("super-rentals/tests/integration/components/rental/image-test", ["@ember/template-factory", "qunit", "ember-qunit", "@ember/test-helpers"], function (_templateFactory, _qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)("Integration | Component | rental/image", function (hooks) {
+    (0, _emberQunit.setupRenderingTest)(hooks);
+    (0, _qunit.test)("it renders the given image", async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        
+            <Rental::Image
+              src="/assets/images/teaching-tomster.png"
+              alt="Teaching Tomster"
+            />
+          
+      */
+      {
+        "id": "VtiW+0j0",
+        "block": "[[[1,\"\\n      \"],[8,[39,0],[[24,\"src\",\"/assets/images/teaching-tomster.png\"],[24,\"alt\",\"Teaching Tomster\"]],null,null],[1,\"\\n    \"]],[],false,[\"rental/image\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom(".image img").exists().hasAttribute("src", "/assets/images/teaching-tomster.png").hasAttribute("alt", "Teaching Tomster");
+    });
+    (0, _qunit.test)("clicking on the component toggles its size", async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        
+            <Rental::Image
+              src="/assets/images/teaching-tomster.png"
+              alt="Teaching Tomster"
+            />
+          
+      */
+      {
+        "id": "VtiW+0j0",
+        "block": "[[[1,\"\\n      \"],[8,[39,0],[[24,\"src\",\"/assets/images/teaching-tomster.png\"],[24,\"alt\",\"Teaching Tomster\"]],null,null],[1,\"\\n    \"]],[],false,[\"rental/image\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom("button.image").exists();
+      assert.dom(".image").doesNotHaveClass("large");
+      assert.dom(".image small").hasText("View Larger");
+      await (0, _testHelpers.click)("button.image");
+      assert.dom(".image").hasClass("large");
+      assert.dom(".image small").hasText("View Smaller");
+      await (0, _testHelpers.click)("button.image");
+      assert.dom(".image").doesNotHaveClass("large");
+      assert.dom(".image small").hasText("View Larger");
     });
   });
 });
