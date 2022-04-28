@@ -85,6 +85,45 @@
 
   _exports.default = _default;
 });
+;define("super-rentals/components/map", ["exports", "@ember/component", "@ember/template-factory", "@glimmer/component", "super-rentals/config/environment"], function (_exports, _component, _templateFactory, _component2, _environment) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  0; //eaimeta@70e063a35619d71f0,"ember-cli-htmlbars",0,"@glimmer/component",0,"super-rentals/config/environment"eaimeta@70e063a35619d71f
+
+  const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
+  /*
+    <div class="map">
+    <img
+      alt="Map image at coordinates {{@lat}},{{@lng}}"
+      ...attributes
+      src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{@lng}},{{@lat}},{{@zoom}}/{{@width}}x{{@height}}@2x?access_token={{this.token}}"
+      width={{@width}}
+      height={{@height}}
+    />
+  </div>
+  
+  */
+  {
+    "id": "tduU5SWc",
+    "block": "[[[10,0],[14,0,\"map\"],[12],[1,\"\\n  \"],[11,\"img\"],[16,\"alt\",[29,[\"Map image at coordinates \",[30,1],\",\",[30,2]]]],[17,3],[16,\"src\",[29,[\"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/\",[30,2],\",\",[30,1],\",\",[30,4],\"/\",[30,5],\"x\",[30,6],\"@2x?access_token=\",[30,0,[\"token\"]]]]],[16,\"width\",[30,5]],[16,\"height\",[30,6]],[12],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@lat\",\"@lng\",\"&attrs\",\"@zoom\",\"@width\",\"@height\"],false,[]]",
+    "moduleName": "super-rentals/components/map.hbs",
+    "isStrictMode": false
+  });
+
+  class MapComponent extends _component2.default {
+    get token() {
+      return encodeURIComponent(_environment.default.MAPBOX_ACCESS_TOKEN);
+    }
+
+  }
+
+  _exports.default = MapComponent;
+  (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, MapComponent);
+});
 ;define("super-rentals/components/nav-bar", ["exports", "@ember/component", "@ember/template-factory", "@ember/component/template-only"], function (_exports, _component, _templateFactory, _templateOnly) {
   "use strict";
 
@@ -791,7 +830,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+f99dafc6"});
+            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+3e8f15e1"});
           }
         
 //# sourceMappingURL=super-rentals.map

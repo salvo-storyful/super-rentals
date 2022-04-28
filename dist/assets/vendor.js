@@ -4,7 +4,7 @@ window.EmberENV = (function(EmberENV, extra) {
   }
 
   return EmberENV;
-})(window.EmberENV || {}, {"FEATURES":{},"EXTEND_PROTOTYPES":{"Date":false},"_APPLICATION_TEMPLATE_WRAPPER":false,"_DEFAULT_ASYNC_OBSERVERS":true,"_JQUERY_INTEGRATION":false,"_TEMPLATE_ONLY_GLIMMER_COMPONENTS":true});
+})(window.EmberENV || {}, {"RAISE_ON_DEPRECATION":true,"FEATURES":{},"EXTEND_PROTOTYPES":{"Date":false},"_APPLICATION_TEMPLATE_WRAPPER":false,"_DEFAULT_ASYNC_OBSERVERS":true,"_JQUERY_INTEGRATION":false,"_TEMPLATE_ONLY_GLIMMER_COMPONENTS":true});
 
 var runningTests = false;
 
