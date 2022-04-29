@@ -100,7 +100,7 @@
     <img
       alt="Map image at coordinates {{@lat}},{{@lng}}"
       ...attributes
-      src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/{{@lng}},{{@lat}},{{@zoom}}/{{@width}}x{{@height}}@2x?access_token={{this.token}}"
+      src={{this.src}}
       width={{@width}}
       height={{@height}}
     />
@@ -108,13 +108,29 @@
   
   */
   {
-    "id": "tduU5SWc",
-    "block": "[[[10,0],[14,0,\"map\"],[12],[1,\"\\n  \"],[11,\"img\"],[16,\"alt\",[29,[\"Map image at coordinates \",[30,1],\",\",[30,2]]]],[17,3],[16,\"src\",[29,[\"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/\",[30,2],\",\",[30,1],\",\",[30,4],\"/\",[30,5],\"x\",[30,6],\"@2x?access_token=\",[30,0,[\"token\"]]]]],[16,\"width\",[30,5]],[16,\"height\",[30,6]],[12],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@lat\",\"@lng\",\"&attrs\",\"@zoom\",\"@width\",\"@height\"],false,[]]",
+    "id": "ZNYvXgcB",
+    "block": "[[[10,0],[14,0,\"map\"],[12],[1,\"\\n  \"],[11,\"img\"],[16,\"alt\",[29,[\"Map image at coordinates \",[30,1],\",\",[30,2]]]],[17,3],[16,\"src\",[30,0,[\"src\"]]],[16,\"width\",[30,4]],[16,\"height\",[30,5]],[12],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@lat\",\"@lng\",\"&attrs\",\"@width\",\"@height\"],false,[]]",
     "moduleName": "super-rentals/components/map.hbs",
     "isStrictMode": false
   });
 
+  const MAPBOX_API = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static';
+
   class MapComponent extends _component2.default {
+    get src() {
+      let {
+        lng,
+        lat,
+        width,
+        height,
+        zoom
+      } = this.args;
+      let coordinates = `${lng},${lat},${zoom}`;
+      let dimensions = `${width}x${height}`;
+      let accessToken = `access_token=${this.token}`;
+      return `${MAPBOX_API}/${coordinates}/${dimensions}@2x?${accessToken}`;
+    }
+
     get token() {
       return encodeURIComponent(_environment.default.MAPBOX_ACCESS_TOKEN);
     }
@@ -173,35 +189,40 @@
   const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
   /*
     <article class="rental">
-    <Rental::Image
-      src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg"
-      alt="A picture of Grand Old Mansion"
-    />
+    <Rental::Image src={{@rental.image}} alt="A picture of {{@rental.title}}" />
     <div class="details">
-      <h3>Grand Old Mansion</h3>
+      <h3>{{@rental.title}}</h3>
       <div class="detail owner">
         <span>Owner:</span>
-        Veruca Salt
+        {{@rental.owner}}
       </div>
       <div class="detail type">
         <span>Type:</span>
-        Standalone
+        {{@rental.type}}
       </div>
       <div class="detail location">
         <span>Location:</span>
-        San Francisco
+        {{@rental.city}}
       </div>
       <div class="detail bedrooms">
         <span>Number of bedrooms:</span>
-        15
+        {{@rental.bedrooms}}
       </div>
     </div>
+    <Map
+      @lat={{@rental.location.lat}}
+      @lng={{@rental.location.lng}}
+      @zoom="9"
+      @width="150"
+      @height="150"
+      alt="A map of {{@rental.title}}"
+    />
   </article>
   
   */
   {
-    "id": "/nJmWQMU",
-    "block": "[[[10,\"article\"],[14,0,\"rental\"],[12],[1,\"\\n  \"],[8,[39,0],[[24,\"src\",\"https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg\"],[24,\"alt\",\"A picture of Grand Old Mansion\"]],null,null],[1,\"\\n  \"],[10,0],[14,0,\"details\"],[12],[1,\"\\n    \"],[10,\"h3\"],[12],[1,\"Grand Old Mansion\"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail owner\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Owner:\"],[13],[1,\"\\n      Veruca Salt\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail type\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Type:\"],[13],[1,\"\\n      Standalone\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail location\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Location:\"],[13],[1,\"\\n      San Francisco\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail bedrooms\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Number of bedrooms:\"],[13],[1,\"\\n      15\\n    \"],[13],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[],false,[\"rental/image\"]]",
+    "id": "tsq3CT35",
+    "block": "[[[10,\"article\"],[14,0,\"rental\"],[12],[1,\"\\n  \"],[8,[39,0],[[16,\"src\",[30,1,[\"image\"]]],[16,\"alt\",[29,[\"A picture of \",[30,1,[\"title\"]]]]]],null,null],[1,\"\\n  \"],[10,0],[14,0,\"details\"],[12],[1,\"\\n    \"],[10,\"h3\"],[12],[1,[30,1,[\"title\"]]],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail owner\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Owner:\"],[13],[1,\"\\n      \"],[1,[30,1,[\"owner\"]]],[1,\"\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail type\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Type:\"],[13],[1,\"\\n      \"],[1,[30,1,[\"type\"]]],[1,\"\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail location\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Location:\"],[13],[1,\"\\n      \"],[1,[30,1,[\"city\"]]],[1,\"\\n    \"],[13],[1,\"\\n    \"],[10,0],[14,0,\"detail bedrooms\"],[12],[1,\"\\n      \"],[10,1],[12],[1,\"Number of bedrooms:\"],[13],[1,\"\\n      \"],[1,[30,1,[\"bedrooms\"]]],[1,\"\\n    \"],[13],[1,\"\\n  \"],[13],[1,\"\\n  \"],[8,[39,1],[[16,\"alt\",[29,[\"A map of \",[30,1,[\"title\"]]]]]],[[\"@lat\",\"@lng\",\"@zoom\",\"@width\",\"@height\"],[[30,1,[\"location\",\"lat\"]],[30,1,[\"location\",\"lng\"]],\"9\",\"150\",\"150\"]],null],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@rental\"],false,[\"rental/image\",\"map\"]]",
     "moduleName": "super-rentals/components/rental.hbs",
     "isStrictMode": false
   });
@@ -591,7 +612,34 @@
   _exports.default = void 0;
   0; //eaimeta@70e063a35619d71f0,"@ember/routing/route"eaimeta@70e063a35619d71f
 
-  class IndexRoute extends _route.default {}
+  const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+
+  class IndexRoute extends _route.default {
+    async model() {
+      let response = await fetch('/api/rentals.json');
+      let {
+        data
+      } = await response.json();
+      return data.map(model => {
+        let {
+          attributes
+        } = model;
+        let type;
+
+        if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
+          type = 'Community';
+        } else {
+          type = 'Standalone';
+        }
+
+        return {
+          type,
+          ...attributes
+        };
+      });
+    }
+
+  }
 
   _exports.default = IndexRoute;
 });
@@ -743,8 +791,8 @@
   0; //eaimeta@70e063a35619d71f0,"@ember/template-factory"eaimeta@70e063a35619d71f
 
   var _default = (0, _templateFactory.createTemplateFactory)({
-    "id": "xqWVUxRt",
-    "block": "[[[8,[39,0],null,null,[[\"default\"],[[[[1,\"\\n  \"],[10,\"h2\"],[12],[1,\"Welcome to Super Rentals!\"],[13],[1,\"\\n  \"],[10,2],[12],[1,\"We hope you find exactly what you're looking for in a place to stay.\"],[13],[1,\"\\n  \"],[8,[39,1],[[24,0,\"button\"]],[[\"@route\"],[\"about\"]],[[\"default\"],[[[[1,\"About Us\"]],[]]]]],[1,\"\\n\"]],[]]]]],[1,\"\\n\\n\"],[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n    \"],[10,\"li\"],[12],[8,[39,2],null,null,null],[13],[1,\"\\n    \"],[10,\"li\"],[12],[8,[39,2],null,null,null],[13],[1,\"\\n    \"],[10,\"li\"],[12],[8,[39,2],null,null,null],[13],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[],false,[\"jumbo\",\"link-to\",\"rental\"]]",
+    "id": "JizReCzA",
+    "block": "[[[8,[39,0],null,null,[[\"default\"],[[[[1,\"\\n  \"],[10,\"h2\"],[12],[1,\"Welcome to Super Rentals!\"],[13],[1,\"\\n  \"],[10,2],[12],[1,\"We hope you find exactly what you're looking for in a place to stay.\"],[13],[1,\"\\n  \"],[8,[39,1],[[24,0,\"button\"]],[[\"@route\"],[\"about\"]],[[\"default\"],[[[[1,\"About Us\"]],[]]]]],[1,\"\\n\"]],[]]]]],[1,\"\\n\\n\"],[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n\"],[42,[28,[37,3],[[28,[37,3],[[30,1]],null]],null],null,[[[1,\"      \"],[10,\"li\"],[12],[8,[39,4],null,[[\"@rental\"],[[30,2]]],null],[13],[1,\"\\n\"]],[2]],null],[1,\"  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@model\",\"rental\"],false,[\"jumbo\",\"link-to\",\"each\",\"-track-array\",\"rental\"]]",
     "moduleName": "super-rentals/templates/index.hbs",
     "isStrictMode": false
   });
@@ -830,7 +878,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+3e8f15e1"});
+            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+a57eca7c"});
           }
         
 //# sourceMappingURL=super-rentals.map
