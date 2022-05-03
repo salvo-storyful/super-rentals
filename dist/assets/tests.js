@@ -267,11 +267,11 @@ define("super-rentals/tests/integration/components/rental-test", ["@ember/templa
 
   0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
 
-  (0, _qunit.module)('Integration | Component | rental', function (hooks) {
+  (0, _qunit.module)('Integration | Component | rentals', function (hooks) {
     (0, _emberQunit.setupRenderingTest)(hooks);
-    (0, _qunit.test)('it renders information about a rental property', async function (assert) {
+    (0, _qunit.test)('it renders all given rental properties by default', async function (assert) {
       this.setProperties({
-        rental: {
+        rentals: [{
           id: 'grand-old-mansion',
           title: 'Grand Old Mansion',
           owner: 'Veruca Salt',
@@ -285,27 +285,55 @@ define("super-rentals/tests/integration/components/rental-test", ["@ember/templa
           bedrooms: 15,
           image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
           description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.'
-        }
+        }, {
+          id: 'urban-living',
+          title: 'Urban Living',
+          owner: 'Mike Teavee',
+          city: 'Seattle',
+          location: {
+            lat: 47.6062,
+            lng: -122.3321
+          },
+          category: 'Condo',
+          type: 'Community',
+          bedrooms: 1,
+          image: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Seattle_-_Barnes_and_Bell_Buildings.jpg',
+          description: 'A commuters dream. This rental is within walking distance of 2 bus stops and the Metro.'
+        }, {
+          id: 'downtown-charm',
+          title: 'Downtown Charm',
+          owner: 'Violet Beauregarde',
+          city: 'Portland',
+          location: {
+            lat: 45.5175,
+            lng: -122.6801
+          },
+          category: 'Apartment',
+          type: 'Community',
+          bedrooms: 3,
+          image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg',
+          description: 'Convenience is at your doorstep with this charming downtown rental. Great restaurants and active night life are within a few feet.'
+        }]
       });
       await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
       /*
-        <Rental @rental={{this.rental}} />
+        <Rentals @rentals={{this.rentals}} />
       */
       {
-        "id": "BECEasIg",
-        "block": "[[[8,[39,0],null,[[\"@rental\"],[[30,0,[\"rental\"]]]],null]],[],false,[\"rental\"]]",
+        "id": "VyYxHg6L",
+        "block": "[[[8,[39,0],null,[[\"@rentals\"],[[30,0,[\"rentals\"]]]],null]],[],false,[\"rentals\"]]",
         "moduleName": "(unknown template module)",
         "isStrictMode": false
       }));
-      assert.dom('article').hasClass('rental');
-      assert.dom('article h3').hasText('Grand Old Mansion');
-      assert.dom('article h3 a').hasAttribute('href', '/rentals/grand-old-mansion');
-      assert.dom('article .detail.owner').includesText('Veruca Salt');
-      assert.dom('article .detail.type').includesText('Standalone');
-      assert.dom('article .detail.location').includesText('San Francisco');
-      assert.dom('article .detail.bedrooms').includesText('15');
-      assert.dom('article .image').exists();
-      assert.dom('article .map').exists();
+      assert.dom('.rentals').exists();
+      assert.dom('.rentals input').exists();
+      assert.dom('.rentals .results').exists();
+      assert.dom('.rentals .results li').exists({
+        count: 3
+      });
+      assert.dom('.rentals .results li:nth-of-type(1)').containsText('Grand Old Mansion');
+      assert.dom('.rentals .results li:nth-of-type(2)').containsText('Urban Living');
+      assert.dom('.rentals .results li:nth-of-type(3)').containsText('Downtown Charm');
     });
   });
 });
@@ -426,6 +454,46 @@ define("super-rentals/tests/integration/components/rental/image-test", ["@ember/
     });
   });
 });
+define("super-rentals/tests/integration/components/rentals/filter-test", ["@ember/template-factory", "qunit", "ember-qunit", "@ember/test-helpers"], function (_templateFactory, _qunit, _emberQunit, _testHelpers) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit",0,"@ember/test-helpers",0,"ember-cli-htmlbars"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)('Integration | Component | rentals/filter', function (hooks) {
+    (0, _emberQunit.setupRenderingTest)(hooks);
+    (0, _qunit.test)('it renders', async function (assert) {
+      // Set any properties with this.set('myProperty', 'value');
+      // Handle any actions with this.set('myAction', function(val) { ... });
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <Rentals::Filter />
+      */
+      {
+        "id": "0BUeUBJ0",
+        "block": "[[[8,[39,0],null,null,null]],[],false,[\"rentals/filter\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom(this.element).hasText(''); // Template block usage:
+
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        
+            <Rentals::Filter>
+              template block text
+            </Rentals::Filter>
+          
+      */
+      {
+        "id": "Qt599p0x",
+        "block": "[[[1,\"\\n      \"],[8,[39,0],null,null,[[\"default\"],[[[[1,\"\\n        template block text\\n      \"]],[]]]]],[1,\"\\n    \"]],[],false,[\"rentals/filter\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom(this.element).hasText('template block text');
+    });
+  });
+});
 define("super-rentals/tests/integration/components/share-button-test", ["@ember/template-factory", "qunit", "ember-qunit", "@ember/service", "@ember/test-helpers"], function (_templateFactory, _qunit, _emberQunit, _service, _testHelpers) {
   "use strict";
 
@@ -444,6 +512,12 @@ define("super-rentals/tests/integration/components/share-button-test", ["@ember/
     (0, _emberQunit.setupRenderingTest)(hooks);
     hooks.beforeEach(function () {
       this.owner.register('service:router', MockRouterService);
+
+      this.tweetParam = param => {
+        let link = (0, _testHelpers.find)('a');
+        let url = new URL(link.href);
+        return url.searchParams.get(param);
+      };
     });
     (0, _qunit.test)('basic usage', async function (assert) {
       await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
@@ -456,7 +530,73 @@ define("super-rentals/tests/integration/components/share-button-test", ["@ember/
         "moduleName": "(unknown template module)",
         "isStrictMode": false
       }));
-      assert.dom('a').hasAttribute('target', '_blank').hasAttribute('rel', 'external nofollow noopener noreferrer').hasAttribute('href', `https://twitter.com/intent/tweet?url=${encodeURIComponent(MOCK_URL.href)}`).hasClass('share').hasClass('button').containsText('Tweet this!');
+      assert.dom('a').hasAttribute('target', '_blank').hasAttribute('rel', 'external nofollow noopener noreferrer').hasAttribute('href', /^https:\/\/twitter\.com\/intent\/tweet/).hasClass('share').hasClass('button').containsText('Tweet this!');
+      assert.strictEqual(this.tweetParam('url'), MOCK_URL.href);
+    });
+    (0, _qunit.test)('it supports passing @text', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <ShareButton @text="Hello Twitter!">Tweet this!</ShareButton>
+      */
+      {
+        "id": "B6EFBitm",
+        "block": "[[[8,[39,0],null,[[\"@text\"],[\"Hello Twitter!\"]],[[\"default\"],[[[[1,\"Tweet this!\"]],[]]]]]],[],false,[\"share-button\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.strictEqual(this.tweetParam('text'), 'Hello Twitter!');
+    });
+    (0, _qunit.test)('it supports passing @hashtags', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <ShareButton @hashtags="foo,bar,baz">Tweet this!</ShareButton>
+      */
+      {
+        "id": "A3XhHF/Z",
+        "block": "[[[8,[39,0],null,[[\"@hashtags\"],[\"foo,bar,baz\"]],[[\"default\"],[[[[1,\"Tweet this!\"]],[]]]]]],[],false,[\"share-button\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.strictEqual(this.tweetParam('hashtags'), 'foo,bar,baz');
+    });
+    (0, _qunit.test)('it supports passing @via', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <ShareButton @via="emberjs">Tweet this!</ShareButton>
+      */
+      {
+        "id": "DcHPI+64",
+        "block": "[[[8,[39,0],null,[[\"@via\"],[\"emberjs\"]],[[\"default\"],[[[[1,\"Tweet this!\"]],[]]]]]],[],false,[\"share-button\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.strictEqual(this.tweetParam('via'), 'emberjs');
+    });
+    (0, _qunit.test)('it supports adding extra classes', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <ShareButton class="extra things">Tweet this!</ShareButton>
+      */
+      {
+        "id": "8aLYpL0j",
+        "block": "[[[8,[39,0],[[24,0,\"extra things\"]],null,[[\"default\"],[[[[1,\"Tweet this!\"]],[]]]]]],[],false,[\"share-button\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom('a').hasClass('share').hasClass('button').hasClass('extra').hasClass('things');
+    });
+    (0, _qunit.test)('the target, rel and href attributes cannot be overridden', async function (assert) {
+      await (0, _testHelpers.render)((0, _templateFactory.createTemplateFactory)(
+      /*
+        <ShareButton target="_self" rel="" href="/">Not a Tweet!</ShareButton>
+      */
+      {
+        "id": "YxoJ4lv6",
+        "block": "[[[8,[39,0],[[24,\"target\",\"_self\"],[24,\"rel\",\"\"],[24,6,\"/\"]],null,[[\"default\"],[[[[1,\"Not a Tweet!\"]],[]]]]]],[],false,[\"share-button\"]]",
+        "moduleName": "(unknown template module)",
+        "isStrictMode": false
+      }));
+      assert.dom('a').hasAttribute('target', '_blank').hasAttribute('rel', 'external nofollow noopener noreferrer').hasAttribute('href', /^https:\/\/twitter\.com\/intent\/tweet/);
     });
   });
 });
@@ -468,6 +608,41 @@ define("super-rentals/tests/test-helper", ["super-rentals/app", "super-rentals/c
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
   (0, _qunitDom.setup)(QUnit.assert);
   (0, _emberQunit.start)();
+});
+define("super-rentals/tests/unit/models/rental-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
+  "use strict";
+
+  0; //eaimeta@70e063a35619d71f0,"qunit",0,"ember-qunit"eaimeta@70e063a35619d71f
+
+  (0, _qunit.module)('Unit | Model | rental', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+    (0, _qunit.test)('it has the right type', function (assert) {
+      let store = this.owner.lookup('service:store');
+      let rental = store.createRecord('rental', {
+        id: 'grand-old-mansion',
+        title: 'Grand Old Mansion',
+        owner: 'Veruca Salt',
+        city: 'San Francisco',
+        location: {
+          lat: 37.7749,
+          lng: -122.4194
+        },
+        category: 'Estate',
+        bedrooms: 15,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
+        description: 'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.'
+      });
+      assert.strictEqual(rental.type, 'Standalone');
+      rental.category = 'Condo';
+      assert.strictEqual(rental.type, 'Community');
+      rental.category = 'Townhouse';
+      assert.strictEqual(rental.type, 'Community');
+      rental.category = 'Apartment';
+      assert.strictEqual(rental.type, 'Community');
+      rental.category = 'Estate';
+      assert.strictEqual(rental.type, 'Standalone');
+    });
+  });
 });
 define("super-rentals/tests/unit/routes/about-test", ["qunit", "ember-qunit"], function (_qunit, _emberQunit) {
   "use strict";

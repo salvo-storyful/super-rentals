@@ -16,6 +16,32 @@
   });
   0; //eaimeta@70e063a35619d71f0,"@ember-data/adapter/json-api"eaimeta@70e063a35619d71f
 });
+;define("super-rentals/adapters/application", ["exports", "@ember-data/adapter/json-api"], function (_exports, _jsonApi) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  0; //eaimeta@70e063a35619d71f0,"@ember-data/adapter/json-api"eaimeta@70e063a35619d71f
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  class ApplicationAdapter extends _jsonApi.default {
+    constructor() {
+      super(...arguments);
+
+      _defineProperty(this, "namespace", 'api');
+    }
+
+    buildURL() {
+      return `${super.buildURL(...arguments)}.json`;
+    }
+
+  }
+
+  _exports.default = ApplicationAdapter;
+});
 ;define("super-rentals/app", ["exports", "@ember/application", "ember-resolver", "ember-load-initializers", "super-rentals/config/environment"], function (_exports, _application, _emberResolver, _emberLoadInitializers, _environment) {
   "use strict";
 
@@ -374,6 +400,107 @@
   _exports.default = RentalImageComponent;
   (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, RentalImageComponent);
 });
+;define("super-rentals/components/rentals", ["exports", "@ember/component", "@ember/template-factory", "@glimmer/component", "@glimmer/tracking"], function (_exports, _component, _templateFactory, _component2, _tracking) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _class, _descriptor;
+
+  0; //eaimeta@70e063a35619d71f0,"ember-cli-htmlbars",0,"@glimmer/component",0,"@glimmer/tracking"eaimeta@70e063a35619d71f
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
+  /*
+    <div class="rentals">
+    <label>
+      <span>Where would you like to stay?</span>
+      <Input @value={{this.query}} class="light" />
+    </label>
+  
+    <ul class="results">
+      {{#each @rentals as |rental|}}
+        <li><Rental @rental={{rental}} /></li>
+      {{/each}}
+    </ul>
+  </div>
+  
+  */
+  {
+    "id": "8b5n+irW",
+    "block": "[[[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"label\"],[12],[1,\"\\n    \"],[10,1],[12],[1,\"Where would you like to stay?\"],[13],[1,\"\\n    \"],[8,[39,0],[[24,0,\"light\"]],[[\"@value\"],[[30,0,[\"query\"]]]],null],[1,\"\\n  \"],[13],[1,\"\\n\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n\"],[42,[28,[37,2],[[28,[37,2],[[30,1]],null]],null],null,[[[1,\"      \"],[10,\"li\"],[12],[8,[39,3],null,[[\"@rental\"],[[30,2]]],null],[13],[1,\"\\n\"]],[2]],null],[1,\"  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@rentals\",\"rental\"],false,[\"input\",\"each\",\"-track-array\",\"rental\"]]",
+    "moduleName": "super-rentals/components/rentals.hbs",
+    "isStrictMode": false
+  });
+
+  let RentalsComponent = (_class = class RentalsComponent extends _component2.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "query", _descriptor, this);
+    }
+
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, "query", [_tracking.tracked], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: function () {
+      return '';
+    }
+  })), _class);
+  _exports.default = RentalsComponent;
+  (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, RentalsComponent);
+});
+;define("super-rentals/components/rentals/filter", ["exports", "@ember/component", "@ember/template-factory", "@glimmer/component"], function (_exports, _component, _templateFactory, _component2) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  0; //eaimeta@70e063a35619d71f0,"ember-cli-htmlbars",0,"@glimmer/component"eaimeta@70e063a35619d71f
+
+  const __COLOCATED_TEMPLATE__ = (0, _templateFactory.createTemplateFactory)(
+  /*
+    {{yield this.results}}
+  
+  */
+  {
+    "id": "kdNCdS7r",
+    "block": "[[[18,1,[[30,0,[\"results\"]]]],[1,\"\\n\"]],[\"&default\"],false,[\"yield\"]]",
+    "moduleName": "super-rentals/components/rentals/filter.hbs",
+    "isStrictMode": false
+  });
+
+  class RentalsFilterComponent extends _component2.default {
+    get results() {
+      let {
+        rentals,
+        query
+      } = this.args;
+
+      if (query) {
+        rentals = rentals.filter(rental => rental.title.includes(query));
+      }
+
+      return rentals;
+    }
+
+  }
+
+  _exports.default = RentalsFilterComponent;
+  (0, _component.setComponentTemplate)(__COLOCATED_TEMPLATE__, RentalsFilterComponent);
+});
 ;define("super-rentals/components/share-button", ["exports", "@ember/component", "@ember/template-factory", "@ember/service", "@glimmer/component"], function (_exports, _component, _templateFactory, _service, _component2) {
   "use strict";
 
@@ -706,6 +833,99 @@
   };
   _exports.default = _default;
 });
+;define("super-rentals/models/rental", ["exports", "@ember-data/model"], function (_exports, _model) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+
+  var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
+
+  0; //eaimeta@70e063a35619d71f0,"@ember-data/model"eaimeta@70e063a35619d71f
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+  let RentalModel = (_class = class RentalModel extends _model.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "title", _descriptor, this);
+
+      _initializerDefineProperty(this, "owner", _descriptor2, this);
+
+      _initializerDefineProperty(this, "city", _descriptor3, this);
+
+      _initializerDefineProperty(this, "location", _descriptor4, this);
+
+      _initializerDefineProperty(this, "category", _descriptor5, this);
+
+      _initializerDefineProperty(this, "image", _descriptor6, this);
+
+      _initializerDefineProperty(this, "bedrooms", _descriptor7, this);
+
+      _initializerDefineProperty(this, "description", _descriptor8, this);
+    }
+
+    get type() {
+      if (COMMUNITY_CATEGORIES.includes(this.category)) {
+        return 'Community';
+      } else {
+        return 'Standalone';
+      }
+    }
+
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, "title", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, "owner", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, "city", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, "location", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, "category", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, "image", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, "bedrooms", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  }), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, "description", [_model.attr], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class);
+  _exports.default = RentalModel;
+});
 ;define("super-rentals/router", ["exports", "@ember/routing/router", "super-rentals/config/environment"], function (_exports, _router, _environment) {
   "use strict";
 
@@ -765,86 +985,82 @@
 
   _exports.default = ContactRoute;
 });
-;define("super-rentals/routes/index", ["exports", "@ember/routing/route"], function (_exports, _route) {
+;define("super-rentals/routes/index", ["exports", "@ember/routing/route", "@ember/service"], function (_exports, _route, _service) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
-  0; //eaimeta@70e063a35619d71f0,"@ember/routing/route"eaimeta@70e063a35619d71f
 
-  const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+  var _class, _descriptor;
 
-  class IndexRoute extends _route.default {
-    async model() {
-      let response = await fetch('/api/rentals.json');
-      let {
-        data
-      } = await response.json();
-      return data.map(model => {
-        let {
-          id,
-          attributes
-        } = model;
-        let type;
+  0; //eaimeta@70e063a35619d71f0,"@ember/routing/route",0,"@ember/service"eaimeta@70e063a35619d71f
 
-        if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-          type = 'Community';
-        } else {
-          type = 'Standalone';
-        }
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
-        return {
-          id,
-          type,
-          ...attributes
-        };
-      });
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  let IndexRoute = (_class = class IndexRoute extends _route.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "store", _descriptor, this);
     }
 
-  }
+    async model() {
+      return this.store.findAll('rental');
+    }
 
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, "store", [_service.service], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class);
   _exports.default = IndexRoute;
 });
-;define("super-rentals/routes/rental", ["exports", "@ember/routing/route"], function (_exports, _route) {
+;define("super-rentals/routes/rental", ["exports", "@ember/routing/route", "@ember/service"], function (_exports, _route, _service) {
   "use strict";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
   _exports.default = void 0;
-  0; //eaimeta@70e063a35619d71f0,"@ember/routing/route"eaimeta@70e063a35619d71f
 
-  const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
+  var _class, _descriptor;
 
-  class RentalRoute extends _route.default {
-    async model(params) {
-      let response = await fetch(`/api/rentals/${params.rental_id}.json`);
-      let {
-        data
-      } = await response.json();
-      let {
-        id,
-        attributes
-      } = data;
-      let type;
+  0; //eaimeta@70e063a35619d71f0,"@ember/routing/route",0,"@ember/service"eaimeta@70e063a35619d71f
 
-      if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
-        type = 'Community';
-      } else {
-        type = 'Standalone';
-      }
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
-      return {
-        id,
-        type,
-        ...attributes
-      };
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
+
+  let RentalRoute = (_class = class RentalRoute extends _route.default {
+    constructor() {
+      super(...arguments);
+
+      _initializerDefineProperty(this, "store", _descriptor, this);
     }
 
-  }
+    async model(params) {
+      return this.store.findRecord('rental', params.rental_id);
+    }
 
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, "store", [_service.service], {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    initializer: null
+  })), _class);
   _exports.default = RentalRoute;
 });
 ;define("super-rentals/serializers/-default", ["exports", "@ember-data/serializer/json"], function (_exports, _json) {
@@ -888,6 +1104,19 @@
     }
   });
   0; //eaimeta@70e063a35619d71f0,"@ember-data/serializer/rest"eaimeta@70e063a35619d71f
+});
+;define("super-rentals/serializers/application", ["exports", "@ember-data/serializer/json-api"], function (_exports, _jsonApi) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  0; //eaimeta@70e063a35619d71f0,"@ember-data/serializer/json-api"eaimeta@70e063a35619d71f
+
+  class ApplicationSerializer extends _jsonApi.default {}
+
+  _exports.default = ApplicationSerializer;
 });
 ;define("super-rentals/services/page-title-list", ["exports", "ember-page-title/services/page-title-list"], function (_exports, _pageTitleList) {
   "use strict";
@@ -995,8 +1224,8 @@
   0; //eaimeta@70e063a35619d71f0,"@ember/template-factory"eaimeta@70e063a35619d71f
 
   var _default = (0, _templateFactory.createTemplateFactory)({
-    "id": "JizReCzA",
-    "block": "[[[8,[39,0],null,null,[[\"default\"],[[[[1,\"\\n  \"],[10,\"h2\"],[12],[1,\"Welcome to Super Rentals!\"],[13],[1,\"\\n  \"],[10,2],[12],[1,\"We hope you find exactly what you're looking for in a place to stay.\"],[13],[1,\"\\n  \"],[8,[39,1],[[24,0,\"button\"]],[[\"@route\"],[\"about\"]],[[\"default\"],[[[[1,\"About Us\"]],[]]]]],[1,\"\\n\"]],[]]]]],[1,\"\\n\\n\"],[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n\"],[42,[28,[37,3],[[28,[37,3],[[30,1]],null]],null],null,[[[1,\"      \"],[10,\"li\"],[12],[8,[39,4],null,[[\"@rental\"],[[30,2]]],null],[13],[1,\"\\n\"]],[2]],null],[1,\"  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@model\",\"rental\"],false,[\"jumbo\",\"link-to\",\"each\",\"-track-array\",\"rental\"]]",
+    "id": "p+xYwC/l",
+    "block": "[[[8,[39,0],null,null,[[\"default\"],[[[[1,\"\\n  \"],[10,\"h2\"],[12],[1,\"Welcome to Super Rentals!\"],[13],[1,\"\\n  \"],[10,2],[12],[1,\"We hope you find exactly what you're looking for in a place to stay.\"],[13],[1,\"\\n  \"],[8,[39,1],[[24,0,\"button\"]],[[\"@route\"],[\"about\"]],[[\"default\"],[[[[1,\"About Us\"]],[]]]]],[1,\"\\n\"]],[]]]]],[1,\"\\n\\n\"],[8,[39,2],null,[[\"@rentals\"],[[30,1]]],null],[1,\"\\n\"]],[\"@model\"],false,[\"jumbo\",\"link-to\",\"rentals\"]]",
     "moduleName": "super-rentals/templates/index.hbs",
     "isStrictMode": false
   });
@@ -1100,7 +1329,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+880f0bac"});
+            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+916eb603"});
           }
         
 //# sourceMappingURL=super-rentals.map
