@@ -429,16 +429,18 @@
     </label>
   
     <ul class="results">
-      {{#each @rentals as |rental|}}
-        <li><Rental @rental={{rental}} /></li>
-      {{/each}}
+      <Rentals::Filter @rentals={{@rentals}} @query={{this.query}} as |results|>
+        {{#each results as |rental|}}
+          <li><Rental @rental={{rental}} /></li>
+        {{/each}}
+      </Rentals::Filter>
     </ul>
   </div>
   
   */
   {
-    "id": "8b5n+irW",
-    "block": "[[[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"label\"],[12],[1,\"\\n    \"],[10,1],[12],[1,\"Where would you like to stay?\"],[13],[1,\"\\n    \"],[8,[39,0],[[24,0,\"light\"]],[[\"@value\"],[[30,0,[\"query\"]]]],null],[1,\"\\n  \"],[13],[1,\"\\n\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n\"],[42,[28,[37,2],[[28,[37,2],[[30,1]],null]],null],null,[[[1,\"      \"],[10,\"li\"],[12],[8,[39,3],null,[[\"@rental\"],[[30,2]]],null],[13],[1,\"\\n\"]],[2]],null],[1,\"  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@rentals\",\"rental\"],false,[\"input\",\"each\",\"-track-array\",\"rental\"]]",
+    "id": "8a5BePv1",
+    "block": "[[[10,0],[14,0,\"rentals\"],[12],[1,\"\\n  \"],[10,\"label\"],[12],[1,\"\\n    \"],[10,1],[12],[1,\"Where would you like to stay?\"],[13],[1,\"\\n    \"],[8,[39,0],[[24,0,\"light\"]],[[\"@value\"],[[30,0,[\"query\"]]]],null],[1,\"\\n  \"],[13],[1,\"\\n\\n  \"],[10,\"ul\"],[14,0,\"results\"],[12],[1,\"\\n    \"],[8,[39,1],null,[[\"@rentals\",\"@query\"],[[30,1],[30,0,[\"query\"]]]],[[\"default\"],[[[[1,\"\\n\"],[42,[28,[37,3],[[28,[37,3],[[30,2]],null]],null],null,[[[1,\"        \"],[10,\"li\"],[12],[8,[39,4],null,[[\"@rental\"],[[30,3]]],null],[13],[1,\"\\n\"]],[3]],null],[1,\"    \"]],[2]]]]],[1,\"\\n  \"],[13],[1,\"\\n\"],[13],[1,\"\\n\"]],[\"@rentals\",\"results\",\"rental\"],false,[\"input\",\"rentals/filter\",\"each\",\"-track-array\",\"rental\"]]",
     "moduleName": "super-rentals/components/rentals.hbs",
     "isStrictMode": false
   });
@@ -1329,7 +1331,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+916eb603"});
+            require("super-rentals/app")["default"].create({"name":"super-rentals","version":"0.0.0+8e900a12"});
           }
         
 //# sourceMappingURL=super-rentals.map
